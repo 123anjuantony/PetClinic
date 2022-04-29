@@ -69,6 +69,11 @@ pipeline {
   	   steps {
               sh 'ansible-playbook -vvv --inventory /tmp/inv $WORKSPACE/deploy/deploy-kube.yml --extra-vars "env=qa build=$BUILD_NUMBER"'
 	   }
+	}
+    stage('Deploy-App-PROD') {
+  	   steps {
+              sh 'ansible-playbook -vvv --inventory /tmp/inv $WORKSPACE/deploy/deploy-kube.yml --extra-vars "env=prod build=$BUILD_NUMBER"'
+	   }
 	   post { 
               always { 
                 cleanWs() 
